@@ -21,7 +21,7 @@ HOST = socket.getaddrinfo(Host, Port)[0][4][0]
 # protocol 6 = TCP; protocol 17 = UDP
 # canonname ist nahezu immer leer
 # sockaddr liefert eine Socketadresse zurück => bei IPv4 2-Tupel (IP, Port);
-# bei IPv6 4-Tupel (IP, Port, flow info , scope id )
+# bei IPv6 4-Tupel (IP, Port, flow info , scope id)
 #
 # 1. [] gibt an welches Tupel (wenn mehrere zurückkommen) man nimmt
 # 2. [] gibt an welches Element des Tupels man wählt
@@ -67,6 +67,8 @@ elif dec != 0 and dec != 1:
 print(myList)
 print(Host, Port, HOST, 'Version: TLS 1.2')
 
+
+
 # Create the file
 workbook = xlsxwriter.Workbook('ssl_times.xlsx')
 for cipher in myList:
@@ -92,7 +94,7 @@ for cipher in myList:
 			wrappedSocket = ssl.wrap_socket(sock, ssl_version=ssl.PROTOCOL_TLSv1_2, ciphers=cipher)
 			wrappedSocket.connect((HOST, Port))
 		except Exception:
-			print 'Different TLS versions? Different cipher suites? Non-valid cipher?'
+			print 'Maybe the connection could not be established or there are some problems with the choosen cipher.'
 			sys.exit()
 		print 'Connection established.'
 		# stop time after TCP ACK
